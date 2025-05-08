@@ -6,31 +6,23 @@
     <title>Redirigiendo...</title>
     <style>
         body {
-            display: none; /* Oculta todo el contenido de la página */
+            display: none;
         }
     </style>
 </head>
 <body>
     <script>
-        // Obtener los parámetros de la URL
         const urlParams = new URLSearchParams(window.location.search);
         const placeId = urlParams.get('placeId');
         const gameInstanceId = urlParams.get('gameInstanceId');
 
-        // Verificar que los parámetros existan
         if (placeId && gameInstanceId) {
-            // Construir la URL roblox://
             const robloxUrl = `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${gameInstanceId}`;
-            
-            // Redirigir inmediatamente
             window.location.replace(robloxUrl);
-
-            // Opcional: Intentar cerrar la ventana después de un pequeño retraso
             setTimeout(() => {
-                window.close(); // Esto probablemente no funcionará en la mayoría de los navegadores
+                window.close();
             }, 1000);
         } else {
-            // Redirigir a about:blank si faltan parámetros
             window.location.replace('about:blank');
         }
     </script>
