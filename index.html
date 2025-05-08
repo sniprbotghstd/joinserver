@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigiendo a Roblox...</title>
+</head>
+<body>
+    <p>Redirigiendo a Roblox...</p>
+    <p>Si no se redirige, <a id="fallbackLink" href="https://www.roblox.com">haz clic aquí</a>.</p>
+    <script>
+        // Obtener los parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const placeId = urlParams.get('placeId');
+        const gameInstanceId = urlParams.get('gameInstanceId');
+
+        // Verificar que los parámetros existan
+        if (placeId && gameInstanceId) {
+            // Construir la URL roblox://
+            const robloxUrl = `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${gameInstanceId}`;
+            // Construir el enlace alternativo (fallback)
+            const fallbackUrl = `https://www.roblox.com/games/${placeId}`;
+            
+            // Actualizar el enlace alternativo
+            document.getElementById('fallbackLink').href = fallbackUrl;
+            
+            // Redirigir usando window.location.replace
+            window.location.replace(robloxUrl);
+        } else {
+            // Si faltan parámetros, mostrar un mensaje de error
+            document.body.innerHTML = '<p>Error: Faltan parámetros placeId o gameInstanceId en la URL.</p>' +
+                                     '<p><a href="https://www.roblox.com">Volver a Roblox</a></p>';
+        }
+    </script>
+</body>
+</html>
